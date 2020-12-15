@@ -31,9 +31,11 @@ async function generateProducts() {
 
 function createProduct(product) {
   const { image, price, title, category } = product;
+  console.log(category);
   // Create Elements
   const container = document.createElement('div');
-  container.classList.add(`product ${category}`);
+  console.log(container);
+  container.classList.add(['product'], [`${category.split(' ').join('')}`]);
   const imageEle = document.createElement('img');
   imageEle.src = image;
   imageEle.alt = title;
@@ -45,6 +47,5 @@ function createProduct(product) {
   detailsDiv.append(titleElement, priceElement);
 
   container.append(imageEle, detailsDiv);
-
   return container;
 }
