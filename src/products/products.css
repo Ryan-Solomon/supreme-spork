@@ -76,3 +76,63 @@ a:active {
 }
 
 /* Main Content */
+
+main.content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin-top: 2rem;
+}
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+}
+
+.side-menu .searchbar {
+  margin-bottom: 1rem;
+}
+
+.side-menu input {
+  font-size: 1.4rem;
+  padding: 0.4rem;
+}
+
+.categories {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+
+.categories ul {
+  list-style: none;
+}
+
+.categories ul li {
+  margin: 1rem 0;
+}
+
+.price-slider h3 {
+  font-size: 2rem;
+}
+
+.price-slider h4 {
+  font-size: 1.3rem;
+}
+
+.product-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.product {
+  height: 350px;
+}
+
+.product img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
