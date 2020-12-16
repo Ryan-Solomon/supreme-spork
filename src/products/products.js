@@ -1,10 +1,19 @@
 // Constants
 const productGalleryParent = document.querySelector('.product-gallery');
+const priceRangeSlider = document.querySelector('#price-slider');
+const priceRangeSliderTextContainer = document.querySelector(
+  '.price-slider h4'
+);
 
 // Event Listeners
 generateProducts();
+priceRangeSlider.addEventListener('change', updatePrice);
 
 // Functions
+
+function updatePrice(e) {
+  priceRangeSliderTextContainer.textContent = `Price: $${e.target.value}`;
+}
 
 async function getProducts() {
   try {
@@ -31,10 +40,8 @@ async function generateProducts() {
 
 function createProduct(product) {
   const { image, price, title, category } = product;
-  console.log(category);
   // Create Elements
   const container = document.createElement('div');
-  console.log(container);
   container.classList.add(['product'], [`${category.split(' ').join('')}`]);
   const imageEle = document.createElement('img');
   imageEle.src = image;
