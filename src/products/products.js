@@ -15,18 +15,17 @@ priceRangeSlider.addEventListener('change', (e) => {
 
 // Functions
 
-function filterProducts(e) {
+async function filterProducts(e) {
+  productGalleryParent.innerHTML = '';
+  await generateProducts();
   const products = Array.from(productGalleryParent.children);
   const filteredProducts = products.filter((p) => {
     const priceDiv = p.querySelector('#item-price');
     const price = priceDiv.textContent;
-    console.log(`Price: ${parseInt(price)}`);
-    console.log(parseInt(e.target.value));
     if (parseInt(price) <= parseInt(e.target.value)) {
       return p;
     }
   });
-  productGalleryParent.innerHTML = '';
   productGalleryParent.append(...filteredProducts);
   console.log(filteredProducts);
 }
