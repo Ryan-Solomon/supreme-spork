@@ -7,9 +7,29 @@ const priceRangeSliderTextContainer = document.querySelector(
 
 // Event Listeners
 generateProducts();
-priceRangeSlider.addEventListener('change', updatePrice);
+
+priceRangeSlider.addEventListener('change', (e) => {
+  updatePrice(e);
+  filterProducts(e);
+});
 
 // Functions
+
+function filterProducts(e) {
+  const products = Array.from(productGalleryParent.children);
+  const filteredProducts = products.filter((p) => {
+    const priceDiv = p.querySelector('#item-price');
+    const price = priceDiv.textContent;
+    console.log(`Price: ${parseInt(price)}`);
+    console.log(parseInt(e.target.value));
+    if (parseInt(price) <= parseInt(e.target.value)) {
+      return p;
+    }
+  });
+  productGalleryParent.innerHTML = '';
+  productGalleryParent.append(...filteredProducts);
+  console.log(filteredProducts);
+}
 
 function updatePrice(e) {
   priceRangeSliderTextContainer.textContent = `Price: $${e.target.value}`;
@@ -50,6 +70,7 @@ function createProduct(product) {
   const titleElement = document.createElement('h4');
   titleElement.textContent = title;
   const priceElement = document.createElement('h4');
+  priceElement.id = 'item-price';
   priceElement.textContent = price;
   detailsDiv.append(titleElement, priceElement);
 
