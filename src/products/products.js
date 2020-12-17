@@ -4,11 +4,14 @@ const priceRangeSlider = document.querySelector('#price-slider');
 const priceRangeSliderTextContainer = document.querySelector(
   '.price-slider h4'
 );
+const categoryContainer = document.querySelector('.category-items');
 
 let allProducts;
 
 // Event Listeners
 generateProducts();
+
+categoryContainer.addEventListener('click', (e) => filterBasedOnCategory(e));
 
 priceRangeSlider.addEventListener('change', (e) => {
   updatePrice(e);
@@ -16,6 +19,39 @@ priceRangeSlider.addEventListener('change', (e) => {
 });
 
 // Functions
+function filterBasedOnCategory(e) {
+  const elementId = e.target.id;
+  switch (elementId) {
+    case 'mens':
+      filterBasedOnCategoryHelper('menclothing');
+      break;
+    case 'womens':
+      filterBasedOnCategoryHelper('womenclothing');
+      break;
+    case 'electronics':
+      filterBasedOnCategoryHelper('electronics');
+      break;
+    case 'jewelery':
+      filterBasedOnCategoryHelper('jewelery');
+      break;
+    default:
+      console.error('messed up');
+  }
+}
+
+async function filterBasedOnCategoryHelper(category) {
+  productGalleryParent.innerHTML = '';
+  await generateProducts();
+  const products = Array.from(productGalleryParent.children);
+  const filteredProducts = products.filter((p) => {
+    if (p.classList.contains(category)) {
+      return p;
+    }
+  });
+
+  productGalleryParent.innerHTML = '';
+  productGalleryParent.append(...filteredProducts);
+}
 
 async function filterProducts(e) {
   productGalleryParent.innerHTML = '';
@@ -31,7 +67,6 @@ async function filterProducts(e) {
   });
   productGalleryParent.innerHTML = '';
   productGalleryParent.append(...filteredProducts);
-  console.log(filteredProducts);
 }
 
 function updatePrice(e) {
@@ -75,6 +110,7 @@ function createProduct(product) {
   imageEle.src = image;
   imageEle.alt = title;
   const detailsDiv = document.createElement('div');
+  detailsDiv.classList.add('product-details');
   const titleElement = document.createElement('h4');
   titleElement.textContent = title;
   const priceElement = document.createElement('h4');

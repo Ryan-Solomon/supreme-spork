@@ -106,11 +106,28 @@ main.content {
 }
 
 .categories ul {
+  margin-top: 1rem;
   list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.categories button {
+  background: none;
+  color: white;
+  border: 1px solid white;
+}
+
+.categories button:hover {
+  background: white;
+  color: #333;
+  transform: scale(0.94);
+  cursor: pointer;
 }
 
 .categories ul li {
   margin: 1rem 0;
+  text-align: center;
 }
 
 .price-slider h3 {
@@ -125,10 +142,12 @@ main.content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
+  margin-right: 2rem;
 }
 
 .product {
   height: 350px;
+  margin-bottom: 3rem;
 }
 
 .product img {
