@@ -5,6 +5,8 @@ const priceRangeSliderTextContainer = document.querySelector(
   '.price-slider h4'
 );
 
+let allProducts;
+
 // Event Listeners
 generateProducts();
 
@@ -17,6 +19,7 @@ priceRangeSlider.addEventListener('change', (e) => {
 
 async function filterProducts(e) {
   productGalleryParent.innerHTML = '';
+
   await generateProducts();
   const products = Array.from(productGalleryParent.children);
   const filteredProducts = products.filter((p) => {
@@ -26,6 +29,7 @@ async function filterProducts(e) {
       return p;
     }
   });
+  productGalleryParent.innerHTML = '';
   productGalleryParent.append(...filteredProducts);
   console.log(filteredProducts);
 }
@@ -46,8 +50,13 @@ async function getProducts() {
 }
 
 async function generateProducts() {
-  const products = await getProducts();
-  if (typeof products === 'string') return;
+  let products;
+  if (!allProducts) {
+    products = await getProducts();
+    allProducts = products.slice();
+  } else {
+    products = allProducts.slice();
+  }
 
   const productFragment = document.createDocumentFragment();
   products.forEach((product) => {
