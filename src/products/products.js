@@ -31,6 +31,9 @@ function filterBasedOnCategory(e) {
     case 'electronics':
       filterBasedOnCategoryHelper('electronics');
       break;
+    case 'all':
+      filterBasedOnCategoryHelper('all');
+      break;
     case 'jewelery':
       filterBasedOnCategoryHelper('jewelery');
       break;
@@ -43,11 +46,16 @@ async function filterBasedOnCategoryHelper(category) {
   productGalleryParent.innerHTML = '';
   await generateProducts();
   const products = Array.from(productGalleryParent.children);
-  const filteredProducts = products.filter((p) => {
-    if (p.classList.contains(category)) {
-      return p;
-    }
-  });
+  let filteredProducts;
+  if (category === 'all') {
+    filteredProducts = products;
+  } else {
+    filteredProducts = products.filter((p) => {
+      if (p.classList.contains(category)) {
+        return p;
+      }
+    });
+  }
 
   productGalleryParent.innerHTML = '';
   productGalleryParent.append(...filteredProducts);
@@ -121,3 +129,8 @@ function createProduct(product) {
   container.append(imageEle, detailsDiv);
   return container;
 }
+
+// Todo
+// 1 - Category is not maintained when using price slides
+// i.e when you slide price, it will re-include all products
+// even if you're not in that category
