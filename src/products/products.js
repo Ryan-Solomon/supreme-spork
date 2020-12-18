@@ -5,12 +5,13 @@ const priceRangeSliderTextContainer = document.querySelector(
   '.price-slider h4'
 );
 const categoryContainer = document.querySelector('.category-items');
+const searchInput = document.querySelector('.searchbar > input');
 
 let allProducts;
 
 // Event Listeners
 generateProducts();
-
+searchInput.addEventListener('input', filterBasedOnSearch);
 categoryContainer.addEventListener('click', (e) => filterBasedOnCategory(e));
 
 priceRangeSlider.addEventListener('change', (e) => {
@@ -19,6 +20,32 @@ priceRangeSlider.addEventListener('change', (e) => {
 });
 
 // Functions
+async function filterBasedOnSearch(e) {
+  console.log(e.target.value);
+  productGalleryParent.innerHTML = '';
+  await generateProducts();
+  const products = Array.from(productGalleryParent.children);
+  let filteredProducts;
+  if (e.target.value.length < 1) {
+    filteredProducts = products;
+  } else {
+    filteredProducts = products.filter((p) => {
+      const productText = p.querySelector('.product-details > h4');
+      if (
+        productText.textContent
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase())
+      ) {
+        return p;
+      } else {
+        return;
+      }
+    });
+    productGalleryParent.innerHTML = '';
+    productGalleryParent.append(...filteredProducts);
+  }
+}
+
 function filterBasedOnCategory(e) {
   const elementId = e.target.id;
   switch (elementId) {
@@ -131,6 +158,7 @@ function createProduct(product) {
 }
 
 // Todo
-// 1 - Category is not maintained when using price slides
+// 1 - Filter based on text input
+// 2 - Category is not maintained when using price slides
 // i.e when you slide price, it will re-include all products
 // even if you're not in that category
