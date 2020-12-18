@@ -156,9 +156,3 @@ function createProduct(product) {
   container.append(imageEle, detailsDiv);
   return container;
 }
-
-// Todo
-// 1 - Filter based on text input
-// 2 - Category is not maintained when using price slides
-// i.e when you slide price, it will re-include all products
-// even if you're not in that category
