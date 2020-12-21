@@ -141,6 +141,14 @@ function createProduct(product) {
   // Create Elements
   const container = document.createElement('div');
   container.classList.add(['product'], [`${category.split(' ').join('')}`]);
+
+  const addToCartBtn = document.createElement('button');
+  addToCartBtn.textContent = 'Add To Cart';
+  addToCartBtn.classList.add('add-to-cart-btn');
+  addToCartBtn.addEventListener('click', () => addToCart(product));
+
+  container.append(addToCartBtn);
+
   const imageEle = document.createElement('img');
   imageEle.src = image;
   imageEle.alt = title;
@@ -156,3 +164,5 @@ function createProduct(product) {
   container.append(imageEle, detailsDiv);
   return container;
 }
+
+// Add cart logic
