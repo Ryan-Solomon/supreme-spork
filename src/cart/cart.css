@@ -1,0 +1,157 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.85),
+      rgba(24, 24, 24, 0.823)
+    ),
+    url('../img/products-background.jpg') center center / cover;
+  background-attachment: fixed;
+  color: white;
+}
+
+.nav-items {
+  display: flex;
+  list-style: none;
+  font-size: 1.75rem;
+}
+
+.nav-items li {
+  padding: 1.4rem 2rem;
+  transition: all 0.2s ease;
+}
+
+.nav-items li:hover {
+  cursor: pointer;
+  background: #fff;
+  color: #333;
+  transform: scale(0.94);
+}
+
+.nav-items li:last-child {
+  margin-left: auto;
+}
+
+.btn {
+  background: none;
+  outline: 1px solid white;
+  color: white;
+  width: 10rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: #fff;
+  color: #333;
+  border: 1px solid #333;
+  cursor: pointer;
+  transform: scale(0.94);
+}
+
+.nav-items a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-items li:hover a {
+  color: #333;
+}
+
+.nav-items a:visited,
+a:hover,
+a:active {
+  color: inherit;
+}
+
+/* Main Content */
+
+main.content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin-top: 2rem;
+}
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+}
+
+.side-menu .searchbar {
+  margin-bottom: 1rem;
+}
+
+.side-menu input {
+  font-size: 1.4rem;
+  padding: 0.4rem;
+}
+
+.categories {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+
+.categories ul {
+  margin-top: 1rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.categories button {
+  background: none;
+  color: white;
+  border: 1px solid white;
+}
+
+.categories button:hover {
+  background: white;
+  color: #333;
+  transform: scale(0.94);
+  cursor: pointer;
+}
+
+.categories ul li {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.price-slider h3 {
+  font-size: 2rem;
+}
+
+.price-slider h4 {
+  font-size: 1.3rem;
+}
+
+.product-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-right: 2rem;
+}
+
+.product {
+  height: 350px;
+  margin-bottom: 3rem;
+}
+
+.product img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

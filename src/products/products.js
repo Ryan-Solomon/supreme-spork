@@ -145,10 +145,9 @@ function createProduct(product) {
   const addToCartBtn = document.createElement('button');
   addToCartBtn.textContent = 'Add To Cart';
   addToCartBtn.classList.add('add-to-cart-btn');
-  addToCartBtn.addEventListener('click', () => addToCart(product));
-
-  container.append(addToCartBtn);
-
+  addToCartBtn.addEventListener('click', () =>
+    addToCart(product, addToCartBtn)
+  );
   const imageEle = document.createElement('img');
   imageEle.src = image;
   imageEle.alt = title;
@@ -161,8 +160,30 @@ function createProduct(product) {
   priceElement.textContent = price;
   detailsDiv.append(titleElement, priceElement);
 
-  container.append(imageEle, detailsDiv);
+  container.append(imageEle, detailsDiv, addToCartBtn);
   return container;
 }
 
-// Add cart logic
+// Cart
+
+let cart = {};
+
+if (localStorage.getItem('cart')) {
+  cart = JSON.parse(localStorage.getItem('cart'));
+} else {
+  cart = {
+    items: [],
+    totalCost: 0,
+  };
+}
+
+function addToCart(product, addToCartButton) {
+  addToCartButton.textContent = 'Added!';
+  setTimeout(() => {
+    addToCartButton.textContent = 'Add To Cart';
+  }, 3000);
+  cart.items.push(product);
+  cart.totalCost = cart.items.reduce((sum, item) => item.price + sum, 0);
+  localStorage.removeItem('cart');
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
